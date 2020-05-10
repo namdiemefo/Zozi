@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.main.MainActivity">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="navigator"
+            type="com.naemo.zozi.ui.main.MainNavigator" />
+
+        <variable
+            name="viewModel"
+            type="com.naemo.zozi.ui.main.MainViewModel" />
+    </data>
+
+
+   <LinearLayout
+       android:id="@+id/layoutDots"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:orientation="vertical"
+       android:gravity="center">
+
+       <Button
+           android:onClick="@{(view) -> navigator.sendCash()}"
+           android:id="@+id/send_button"
+           android:layout_width="234dp"
+           android:layout_height="81dp"
+           android:text="@string/send_money" />
+
+
+       <Button
+           android:onClick="@{(view) -> navigator.shareLink()}"
+           android:id="@+id/share_button"
+           android:layout_width="234dp"
+           android:layout_height="81dp"
+           android:text="@string/recieve_money" />
+
+
+
+   </LinearLayout>
+
+
+       
+
+
+
+
+
+
+
+
+</layout>

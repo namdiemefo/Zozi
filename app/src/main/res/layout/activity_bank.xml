@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.account.bank.BankActivity">
+
+    <data>
+        <import type="android.view.View" />
+
+        <variable
+            name="navigator"
+            type="com.naemo.zozi.ui.account.bank.BankNavigator" />
+
+        <variable
+            name="viewModel"
+            type="com.naemo.zozi.ui.account.bank.BankViewModel" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_marginTop="160dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:text="@string/enter_your_bank_of_choice"
+            android:textColor="@color/colorPrimary" />
+
+        <FrameLayout
+            android:layout_gravity="center"
+            android:layout_width="337dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="100dp"
+            android:background="@drawable/rounded_field">
+
+            <Spinner
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:id="@+id/banks"
+                android:imeOptions="actionDone"
+                android:textColorHint="@color/colorHint"
+                android:textSize="13sp" />
+        </FrameLayout>
+
+        <EditText
+            android:id="@+id/acc_number"
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="Account number"
+            android:layout_gravity="center"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp" />
+
+        <Button
+            android:onClick="enterBank"
+            android:layout_marginTop="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/enter" />
+
+    </LinearLayout>
+</layout>
