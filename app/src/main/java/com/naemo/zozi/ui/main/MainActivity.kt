@@ -3,7 +3,10 @@ package com.naemo.zozi.ui.main
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.Observer
+import com.google.gson.Gson
 import com.hover.sdk.api.Hover
 import com.naemo.zozi.BR
 import com.naemo.zozi.R
@@ -11,7 +14,6 @@ import com.naemo.zozi.databinding.ActivityMainBinding
 import com.naemo.zozi.db.room.User
 import com.naemo.zozi.ui.base.BaseActivity
 import java.net.URLEncoder
-import java.util.*
 import javax.inject.Inject
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNavigator {
@@ -52,7 +54,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
     }
 
     override fun sendCash() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        Toast.makeText(this, "get a link", Toast.LENGTH_SHORT).show()
     }
 
     override fun shareLink() {
@@ -63,19 +65,20 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
     }
 
     private fun useUser(it: User?) {
-        val user = it?.toString()
-       // val link = user?.toByte().toString()
-        val enc = "UTF-8"
-        val encode = URLEncoder.encode(user, enc)
-      /*  val sendIntent : Intent = Intent().apply {
-            Uri.parse(user)
+        val gson = Gson()
+        val user = gson.toJson(it)
+       // val user = it?.toString()
+        val link = URLEncoder.encode(user, "UTF-8")
+        Log.d("share", link.toString())
+
+        val url = "http://www.zozi.com/send?$link"
+
+        val sendIntent : Intent = Intent().apply {
             action = Intent.ACTION_SEND
-            putExtra(Intent.EXTRA_TEXT, user)
+            putExtra(Intent.EXTRA_TEXT, url)
             type = "text/plain"
-        }*/
-        val sendIntent : Intent = Uri.parse(user).let {
-            Intent(Intent.EXTRA_TEXT, it)
         }
+
         val shareIntent = Intent.createChooser(sendIntent, null)
         startActivity(shareIntent)
     }

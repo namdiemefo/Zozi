@@ -1,19 +1,23 @@
 package com.naemo.zozi.ui.account.bank
 
+import android.annotation.TargetApi
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Typeface
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.TextView
+import androidx.annotation.RequiresApi
+import androidx.core.content.res.ResourcesCompat
 import com.naemo.zozi.BR
 import com.naemo.zozi.R
 import com.naemo.zozi.databinding.ActivityBankBinding
-import com.naemo.zozi.db.room.User
-import com.naemo.zozi.db.room.UserRepository
 import com.naemo.zozi.ui.base.BaseActivity
 import com.naemo.zozi.ui.main.MainActivity
-import com.naemo.zozi.ui.main.MainViewModel
+import com.naemo.zozi.utils.AppUtils
 import kotlinx.android.synthetic.main.activity_bank.*
 import javax.inject.Inject
 
@@ -25,17 +29,18 @@ class BankActivity : BaseActivity<ActivityBankBinding, BankViewModel>(), BankNav
     var mLayoutId = R.layout.activity_bank
         @Inject set
 
+    var appUtils = AppUtils()
+        @Inject set
+
     var mBinder: ActivityBankBinding? = null
 
-    internal var bank = arrayOf("--Select Bank--", "Zenith", "Gtb", "Access", "Ecobank", "Uba")
+    internal var bank = arrayOf("--Select Bank--", "Zenith", "Gtb", "Access")
     private lateinit var arrayAdapter: ArrayAdapter<String>
     lateinit var bankSelected: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setContentView(R.layout.activity_bank)
         doBinding()
         initView()
-
     }
 
     private fun doBinding() {
@@ -43,7 +48,6 @@ class BankActivity : BaseActivity<ActivityBankBinding, BankViewModel>(), BankNav
         mBinder?.viewModel = bankViewModel
         mBinder?.navigator = this
         mBinder?.viewModel?.setNavigator(this)
-
     }
 
     private fun initView() {
@@ -53,6 +57,39 @@ class BankActivity : BaseActivity<ActivityBankBinding, BankViewModel>(), BankNav
                     return if (position == 0) {
                         return false
                     } else true
+                }
+
+                @TargetApi(Build.VERSION_CODES.M)
+                override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+                    val view = super.getView(position, convertView, parent)
+                    val typeface = ResourcesCompat.getFont(this@BankActivity, R.font.montserrat)
+                    val tv = view as TextView
+                    if (position == 0) {
+                        tv.setTextColor(getColor(R.color.dot_light_screen1))
+                        tv.setTypeface(typeface, Typeface.ITALIC)
+                    } else {
+                        tv.setTextColor(getColor(R.color.colorWhite))
+                        tv.setTypeface(typeface, Typeface.ITALIC)
+                    }
+                    return view
+                }
+
+                @TargetApi(Build.VERSION_CODES.O)
+                @RequiresApi(Build.VERSION_CODES.M)
+                override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
+                    val view = super.getDropDownView(position, convertView, parent)
+                    view.setBackgroundColor(resources.getColor(R.color.colorBackground))
+                    val typeface = ResourcesCompat.getFont(this@BankActivity, R.font.montserrat)
+                    val tv = view as TextView
+                    if (position == 0) {
+                        tv.setTextColor(getColor(R.color.colorHint))
+                        tv.setTypeface(typeface, Typeface.ITALIC)
+                    } else {
+                        tv.setTextColor(getColor(R.color.dot_light_screen1))
+                        tv.setTypeface(typeface, Typeface.ITALIC)
+
+                    }
+                    return view
                 }
             }
 
@@ -71,16 +108,6 @@ class BankActivity : BaseActivity<ActivityBankBinding, BankViewModel>(), BankNav
 
     }
 
-    fun enterBank(view: View) {
-        val intents = intent
-        val name = intents.getStringExtra("name")
-        val bank = bankSelected
-        val account = acc_number.text.toString()
-        val user = User(1, name, account, bank)
-        getViewModel()?.saveUser(user)
-        startActivity(Intent(this, MainActivity::class.java))
-    }
-
     override fun getBindingVariable(): Int {
         return BR.viewModel
     }
@@ -91,5 +118,21 @@ class BankActivity : BaseActivity<ActivityBankBinding, BankViewModel>(), BankNav
 
     override fun getLayoutId(): Int {
         return mLayoutId
+    }
+
+    override fun showToast(msg: String) {
+        appUtils.showSnackBar(this, main_frane, msg)
+    }
+
+    override fun enter() {
+        hideKeyBoard()
+        val intents = intent
+        val name = intents.getStringExtra("name")
+        val bank = bankSelected
+        getViewModel()?.next(name, bank)
+    }
+
+    override fun goToMain() {
+        startActivity(Intent(this, MainActivity::class.java))
     }
 }

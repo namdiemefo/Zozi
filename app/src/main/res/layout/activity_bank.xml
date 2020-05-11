@@ -17,20 +17,23 @@
     </data>
 
     <LinearLayout
+        android:id="@+id/main_frane"
+        android:background="@color/colorBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         >
 
         <TextView
-            android:layout_marginTop="160dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="160dp"
+            android:fontFamily="@font/montserrat"
             android:gravity="center"
-            android:textSize="30sp"
             android:text="@string/enter_your_bank_of_choice"
-            android:textColor="@color/colorPrimary" />
+            android:textColor="@color/dot_light_screen1"
+            android:textSize="20sp" />
 
         <FrameLayout
             android:layout_gravity="center"
@@ -40,7 +43,7 @@
             android:background="@drawable/rounded_field">
 
             <Spinner
-                android:padding="10dp"
+                android:padding="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:id="@+id/banks"
@@ -50,21 +53,32 @@
         </FrameLayout>
 
         <EditText
+            android:textSize="13sp"
+            android:paddingStart="20dp"
+            android:textColorHint="@color/colorHint"
+            android:textColor="@color/colorWhite"
+            android:background="@drawable/rounded_field"
+            android:fontFamily="@font/montserrat"
             android:id="@+id/acc_number"
             android:layout_marginTop="30dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="337dp"
+            android:layout_height="60dp"
             android:inputType="number"
+            android:text="@={viewModel.acc}"
             android:hint="Account number"
             android:layout_gravity="center"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp" />
 
         <Button
-            android:onClick="enterBank"
+            android:textSize="13sp"
+            android:id="@+id/next_b"
+            android:background="@drawable/round_button"
+            android:onClick="@{(view) -> navigator.enter()}"
             android:layout_marginTop="50dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="237dp"
+            android:layout_height="66dp"
+            android:textColor="@color/colorWhite"
             android:layout_gravity="center"
             android:text="@string/enter" />
 

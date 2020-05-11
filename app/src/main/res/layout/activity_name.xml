@@ -4,34 +4,46 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
+    android:id="@+id/main_frame"
+    android:background="@color/colorBackground"
     tools:context=".ui.account.name.NameActivity">
 
     <TextView
+        android:fontFamily="@font/montserrat"
         android:id="@+id/text"
         android:layout_marginTop="200dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textSize="30sp"
+        android:gravity="center"
+        android:textSize="20sp"
         android:text="@string/enter_your_full_name"
-        android:textColor="@color/colorPrimary" />
+        android:textColor="@color/dot_light_screen1" />
 
     <EditText
+        android:paddingStart="20dp"
+        android:textColorHint="@color/colorHint"
+        android:textColor="@color/colorWhite"
+        android:background="@drawable/rounded_field"
+        android:fontFamily="@font/montserrat"
         android:id="@+id/name"
         android:layout_marginTop="100dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="337dp"
+        android:layout_height="60dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_gravity="center"
         android:hint="@string/obinna_olawale_ahmed" />
 
     <Button
+        android:textColor="@color/colorWhite"
+        android:background="@drawable/round_button"
+        android:fontFamily="@font/montserrat"
         android:id="@+id/enter_name"
         android:onClick="enterName"
         android:layout_marginTop="50dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="237dp"
+        android:layout_height="60dp"
         android:layout_gravity="center"
         android:text="@string/enter" />
 

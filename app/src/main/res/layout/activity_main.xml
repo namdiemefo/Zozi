@@ -20,6 +20,7 @@
 
 
    <LinearLayout
+       android:background="@color/colorBackground"
        android:id="@+id/layoutDots"
        android:layout_width="match_parent"
        android:layout_height="match_parent"
@@ -27,14 +28,21 @@
        android:gravity="center">
 
        <Button
+           android:fontFamily="@font/montserrat"
+           android:layout_marginBottom="40dp"
+           android:textColor="@color/colorWhite"
+           android:background="@drawable/round_button"
            android:onClick="@{(view) -> navigator.sendCash()}"
            android:id="@+id/send_button"
-           android:layout_width="234dp"
-           android:layout_height="81dp"
+           android:layout_width="237dp"
+           android:layout_height="66dp"
            android:text="@string/send_money" />
 
 
        <Button
+           android:fontFamily="@font/montserrat"
+           android:textColor="@color/colorWhite"
+           android:background="@drawable/round_button"
            android:onClick="@{(view) -> navigator.shareLink()}"
            android:id="@+id/share_button"
            android:layout_width="234dp"

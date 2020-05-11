@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.naemo.zozi">
 
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <application
         android:name=".Zozi"
         android:allowBackup="true"
@@ -10,7 +11,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.account.send.SendActivity"></activity>
+        <activity android:name=".ui.account.send.SendActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:scheme="http"
+                    android:host="www.zozi.com"
+                    android:pathPattern="/send" />
+            </intent-filter>
+        </activity>
         <activity android:name=".ui.main.MainActivity" />
         <activity android:name=".ui.account.bank.BankActivity" />
         <activity android:name=".ui.account.name.NameActivity">
@@ -24,6 +37,9 @@
         <meta-data
             android:name="com.hover.ApiKey"
             android:value="81d5c4db14c8abb38304a16389e25dd5" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

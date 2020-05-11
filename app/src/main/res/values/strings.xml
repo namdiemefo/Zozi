@@ -3,8 +3,10 @@
     <string name="enter_your_full_name">ENTER YOUR FULL NAME</string>
     <string name="obinna_olawale_ahmed">Obinna Olawale Ahmed</string>
     <string name="enter">Enter</string>
-    <string name="enter_your_bank_of_choice">ENTER YOUR BANK OF CHOICE</string>
+    <string name="enter_your_bank_of_choice">ENTER BANK OF CHOICE</string>
     <string name="next">next</string>
     <string name="recieve_money">Recieve money</string>
     <string name="send_money">Send money</string>
+    <string name="amount">Enter amount</string>
+    <string name="send">Send Money</string>
 </resources>
